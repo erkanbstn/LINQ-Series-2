@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBSınavEntityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TblDersler">
+    <Key>
+      <PropertyRef Name="DersID" />
+    </Key>
+    <Property Name="DersID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DersAd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TblNotlar" Relationship="Self.FK_TblNotlar_TblDersler" FromRole="TblDersler" ToRole="TblNotlar" />
+  </EntityType>
+  <EntityType Name="TblKulüpler">
+    <Key>
+      <PropertyRef Name="KulupID" />
+    </Key>
+    <Property Name="KulupID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KulupAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TblNotlar">
+    <Key>
+      <PropertyRef Name="NotID" />
+    </Key>
+    <Property Name="NotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ogr" Type="Int32" />
+    <Property Name="Ders" Type="Int32" />
+    <Property Name="Sınav1" Type="Int16" />
+    <Property Name="Sınav2" Type="Int16" />
+    <Property Name="Sınav3" Type="Int16" />
+    <Property Name="Ortalama" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="Durum" Type="Boolean" />
+    <NavigationProperty Name="TblDersler" Relationship="Self.FK_TblNotlar_TblDersler" FromRole="TblNotlar" ToRole="TblDersler" />
+    <NavigationProperty Name="TblÖğrenci" Relationship="Self.FK_TblNotlar_TblÖğrenci" FromRole="TblNotlar" ToRole="TblÖğrenci" />
+  </EntityType>
+  <EntityType Name="TblÖğrenci">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Resim" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Şehir" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TblNotlar" Relationship="Self.FK_TblNotlar_TblÖğrenci" FromRole="TblÖğrenci" ToRole="TblNotlar" />
+  </EntityType>
+  <Association Name="FK_TblNotlar_TblDersler">
+    <End Role="TblDersler" Type="Self.TblDersler" Multiplicity="0..1" />
+    <End Role="TblNotlar" Type="Self.TblNotlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblDersler">
+        <PropertyRef Name="DersID" />
+      </Principal>
+      <Dependent Role="TblNotlar">
+        <PropertyRef Name="Ders" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblNotlar_TblÖğrenci">
+    <End Role="TblÖğrenci" Type="Self.TblÖğrenci" Multiplicity="0..1" />
+    <End Role="TblNotlar" Type="Self.TblNotlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblÖğrenci">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TblNotlar">
+        <PropertyRef Name="Ogr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBSınavEntityEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TblDersler" EntityType="Self.TblDersler" />
+    <EntitySet Name="TblKulüpler" EntityType="Self.TblKulüpler" />
+    <EntitySet Name="TblNotlar" EntityType="Self.TblNotlar" />
+    <EntitySet Name="TblÖğrenci" EntityType="Self.TblÖğrenci" />
+    <AssociationSet Name="FK_TblNotlar_TblDersler" Association="Self.FK_TblNotlar_TblDersler">
+      <End Role="TblDersler" EntitySet="TblDersler" />
+      <End Role="TblNotlar" EntitySet="TblNotlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblNotlar_TblÖğrenci" Association="Self.FK_TblNotlar_TblÖğrenci">
+      <End Role="TblÖğrenci" EntitySet="TblÖğrenci" />
+      <End Role="TblNotlar" EntitySet="TblNotlar" />
+    </AssociationSet>
+    <FunctionImport Name="notta" ReturnType="Collection(DBSınavEntityModel.notta_Result)" />
+  </EntityContainer>
+  <ComplexType Name="notta_Result">
+    <Property Type="String" Name="Ad_Soyad" Nullable="true" MaxLength="61" />
+    <Property Type="String" Name="DersAd" Nullable="true" MaxLength="30" />
+    <Property Type="Decimal" Name="Ortalama" Nullable="true" Precision="5" Scale="2" />
+    <Property Type="Boolean" Name="Durum" Nullable="true" />
+  </ComplexType>
+</Schema>

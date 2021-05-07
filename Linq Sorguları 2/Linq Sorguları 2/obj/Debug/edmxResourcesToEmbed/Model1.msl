@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBSınavEntityModelStoreContainer" CdmEntityContainer="DBSınavEntityEntities">
+    <EntitySetMapping Name="TblDersler">
+      <EntityTypeMapping TypeName="DBSınavEntityModel.TblDersler">
+        <MappingFragment StoreEntitySet="TblDersler">
+          <ScalarProperty Name="DersID" ColumnName="DersID" />
+          <ScalarProperty Name="DersAd" ColumnName="DersAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblKulüpler">
+      <EntityTypeMapping TypeName="DBSınavEntityModel.TblKulüpler">
+        <MappingFragment StoreEntitySet="TblKulüpler">
+          <ScalarProperty Name="KulupID" ColumnName="KulupID" />
+          <ScalarProperty Name="KulupAd" ColumnName="KulupAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblNotlar">
+      <EntityTypeMapping TypeName="DBSınavEntityModel.TblNotlar">
+        <MappingFragment StoreEntitySet="TblNotlar">
+          <ScalarProperty Name="NotID" ColumnName="NotID" />
+          <ScalarProperty Name="Ogr" ColumnName="Ogr" />
+          <ScalarProperty Name="Ders" ColumnName="Ders" />
+          <ScalarProperty Name="Sınav1" ColumnName="Sınav1" />
+          <ScalarProperty Name="Sınav2" ColumnName="Sınav2" />
+          <ScalarProperty Name="Sınav3" ColumnName="Sınav3" />
+          <ScalarProperty Name="Ortalama" ColumnName="Ortalama" />
+          <ScalarProperty Name="Durum" ColumnName="Durum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblÖğrenci">
+      <EntityTypeMapping TypeName="DBSınavEntityModel.TblÖğrenci">
+        <MappingFragment StoreEntitySet="TblÖğrenci">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+          <ScalarProperty Name="Resim" ColumnName="Resim" />
+          <ScalarProperty Name="Şehir" ColumnName="Şehir" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="notta" FunctionName="DBSınavEntityModel.Store.notta">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBSınavEntityModel.notta_Result">
+          <ScalarProperty Name="Ad_Soyad" ColumnName="Ad Soyad" />
+          <ScalarProperty Name="DersAd" ColumnName="DersAd" />
+          <ScalarProperty Name="Ortalama" ColumnName="Ortalama" />
+          <ScalarProperty Name="Durum" ColumnName="Durum" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
